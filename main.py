@@ -41,11 +41,19 @@ def main():
 
 	forecast_list = forecast["list"]
 
-	for index in range(len(forecast["list"])):
-		date_variable = (forecast["list"][index]["dt_txt"]).split(" ")
-		print(date_variable[0])
-
 	print("Here is the 5-Day Forecast.")
+
+	for index in range(len(forecast["list"])):
+		date_time = (forecast["list"][index]["dt_txt"])
+		print(date_time)
+		print("\tTemperature: {}".format(forecast["list"][index]["main"]["temp"]))
+		print("\tPressure: {}".format(forecast["list"][index]["main"]["pressure"]))
+		print("\tHumidity: {}".format(forecast["list"][index]["main"]["humidity"]))
+		print("\tLow: {}".format(forecast["list"][index]["main"]["temp_min"]))
+		print("\tHigh: {}".format(forecast["list"][index]["main"]["temp_max"]))
+
+
+	
 
 
 
