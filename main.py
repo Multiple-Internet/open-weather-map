@@ -9,9 +9,13 @@ def main():
 		print("Please pass in an API key")
 		exit(0)
 
+	city = input("For which city do you need weather?")
+	country = input("What is the country?")
+	location = city,country.lower()
+
 	payload = {
-		"appid": api_key
-		"q": ?????
+		"appid": api_key,
+		"q": location,
 		"units": "imperial",
 	}
 
