@@ -13,47 +13,56 @@ def main():
 	country = input("What is the country?\n >")
 	location = city + "," + country.lower()
 
+	if city == "assdf":
+		print("This is not a city.")
 
 
-	payload = {
-		"appid": api_key,
-		"q": location,
-		"units": "imperial",
-	}
+	#elif city == "":
+	#	print("You did not enter a location.")
 
-	r = requests.get("http://api.openweathermap.org/data/2.5/weather", params=payload)
+	else:
+		
+		try:
+			payload = {
+				"appid": api_key,
+				"q": location,
+				"units": "imperial",
+			}
 
-	print(r.url)
-	weather = r.json()
-	
-	print("Today's Weather Conditions \n")
+			r = requests.get("http://api.openweathermap.org/data/2.5/weather", params=payload)
 
-	print("Current Temperature: {}".format(weather["main"]["temp"]))
-	print("Pressure: {}".format(weather["main"]["pressure"]))
-	print("Humidity: {}".format(weather["main"]["humidity"]))
-	print("Today's Low: {}".format(weather["main"]["temp_min"]))
-	print("Today's High: {}".format(weather["main"]["temp_max"]))
+			print(r.url)
+			weather = r.json()
+			
+			print("Today's Weather Conditions \n")
 
-	f = requests.get("http://api.openweathermap.org/data/2.5/forecast", params=payload)
+			print("Current Temperature: {}".format(weather["main"]["temp"]))
+			print("Pressure: {}".format(weather["main"]["pressure"]))
+			print("Humidity: {}".format(weather["main"]["humidity"]))
+			print("Today's Low: {}".format(weather["main"]["temp_min"]))
+			print("Today's High: {}".format(weather["main"]["temp_max"]))
 
-	print(f.url)
-	forecast = f.json()
+			f = requests.get("http://api.openweathermap.org/data/2.5/forecast", params=payload)
 
-	forecast_list = forecast["list"]
+			print(f.url)
+			forecast = f.json()
 
-	print("Here is the 5-Day Forecast.")
+			forecast_list = forecast["list"]
 
-	for index in range(len(forecast["list"])):
-		date_time = (forecast["list"][index]["dt_txt"])
-		print(date_time)
-		print("\tTemperature: {}".format(forecast["list"][index]["main"]["temp"]))
-		print("\tPressure: {}".format(forecast["list"][index]["main"]["pressure"]))
-		print("\tHumidity: {}".format(forecast["list"][index]["main"]["humidity"]))
-		print("\tLow: {}".format(forecast["list"][index]["main"]["temp_min"]))
-		print("\tHigh: {}".format(forecast["list"][index]["main"]["temp_max"]))
+			print("Here is the 5-Day Forecast.")
 
+			for index in range(len(forecast["list"])):
+				date_time = (forecast["list"][index]["dt_txt"])
+				print(date_time)
+				print("\tTemperature: {}".format(forecast["list"][index]["main"]["temp"]))
+				print("\tPressure: {}".format(forecast["list"][index]["main"]["pressure"]))
+				print("\tHumidity: {}".format(forecast["list"][index]["main"]["humidity"]))
+				print("\tLow: {}".format(forecast["list"][index]["main"]["temp_min"]))
+				print("\tHigh: {}".format(forecast["list"][index]["main"]["temp_max"]))
+		except KeyError:
+			print("This is not a location.")
 
-	
+		
 
 
 
